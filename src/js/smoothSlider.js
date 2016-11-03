@@ -1,31 +1,13 @@
-var util = {
-  addClass: function (el, name) {
-    if (!el) {
-      return
-    }
-    var nameList = name.split(' ')
-    var i = nameList.length
-    while (i--) {
-      el.className = new RegExp('(\s*)' + nameList[i] + '(\s*)', 'ig').test(el.className) && el.className || (el.className + ' ' + nameList[i]).replace(/^\s|\s$/g, '')
-    }
-  },
-  removeClass: function (el, name) {
-    if (!el) {
-      return
-    }
-    var nameList = name.split(' ')
-    var i = nameList.length
-    while (i--) {
-      el.className = el.className.replace(new RegExp('(\s*)' + nameList[i] + '(\s*)', 'ig'), '').replace(/^\s|\s$/g, '').replace(/\s+/g, ' ')
-    }
-  }
-}
+var util = require('./util')
 
 function SmoothSlider () {
   var smoothContainer = document.getElementsByClassName('smooth-slider')[0]
   var sliders = smoothContainer.getElementsByClassName('slider-item')
   var sliderNav = smoothContainer.getElementsByClassName('slider-nav')[0]
-  var navItems = sliderNav.getElementsByClassName('nav-item')
+  var navItems = [];
+  if (sliderNav) {
+    navItems = sliderNav.getElementsByClassName('nav-item')
+  }
   var sliderCount = sliders.length
   var activeIndex = 0
 
@@ -43,6 +25,13 @@ function SmoothSlider () {
     return sliders[activeIndex + 1]
   }
 
+  var activateNavItem = function (index) {
+    Array.prototype.forEach.call(navItems, function (item) {
+      util.removeClass(item, 'active')
+    })
+    util.addClass(navItems[index], 'active')
+  }
+
   var activateSlider = function (index) {
     var prevSlider = getPrevSlider(index)
     var nextSlider = getNextSlider(index)
@@ -54,14 +43,13 @@ function SmoothSlider () {
       util.removeClass(slider, 'next-slider')
     })
 
-    Array.prototype.forEach.call(navItems, function (item) {
-      util.removeClass(item, 'active')
-    })
-
     util.addClass(prevSlider, 'prev-slider')
     util.addClass(activateSlider, 'active-slider')
     util.addClass(nextSlider, 'next-slider')
-    util.addClass(navItems[index], 'active')
+
+    if (sliderNav) {
+      activateNavItem(index);
+    }
 
     activeIndex = index
   }
@@ -70,24 +58,28 @@ function SmoothSlider () {
     var navLeft = smoothContainer.getElementsByClassName('nav-left')[0]
     var navRight = smoothContainer.getElementsByClassName('nav-right')[0]
 
-    navLeft.onclick = function () {
-      var newIndex
-      if (activeIndex === 0) {
-        newIndex = sliderCount - 1
-      } else {
-        newIndex = activeIndex - 1
+    if (navLeft) {
+      navLeft.onclick = function () {
+        var newIndex
+        if (activeIndex === 0) {
+          newIndex = sliderCount - 1
+        } else {
+          newIndex = activeIndex - 1
+        }
+        activateSlider(newIndex)
       }
-      activateSlider(newIndex)
     }
 
-    navRight.onclick = function () {
-      var newIndex
-      if (activeIndex === sliderCount - 1) {
-        newIndex = 0
-      } else {
-        newIndex = activeIndex + 1
+    if (navRight) {
+      navRight.onclick = function () {
+        var newIndex
+        if (activeIndex === sliderCount - 1) {
+          newIndex = 0
+        } else {
+          newIndex = activeIndex + 1
+        }
+        activateSlider(newIndex)
       }
-      activateSlider(newIndex)
     }
   }
 
@@ -105,7 +97,9 @@ function SmoothSlider () {
 
   var bindEvents = function () {
     bindNavDirClickEvent()
-    bindNavItemClickEvent()
+    if (sliderNav) {
+      bindNavItemClickEvent()
+    }
   }
 
   var init = function () {
