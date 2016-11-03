@@ -13,7 +13,7 @@ gulp.task('js', function () {
     .pipe(browserify({
       transform: ['babelify']
     }))
-    // .pipe(uglify())
+    .pipe(uglify())
     .pipe(gulp.dest('./dist/js'))
     .pipe(livereload())
     .pipe(notify('task "js" completed'));
