@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="dist/css/smoothSlider.css">
+  <style>
+    .slider-container {
+      width: 1100px;
+      margin: 0 auto;
+      height: 250px; /*图片高度*/
+      overflow: hidden;
+    }
+    .smooth-slider {
+      width: 633px; /*图片宽度*/
+    }
+  </style>
+</head>
+<body>
+  <div class="slider-container">
+    <div class="smooth-slider">
+      <div class="slider-list">
+        <a href="http://www.baidu.com" class="slider-item">
+          <img src="img/1.jpg" alt="">
+        </a>
+        <a href="http://www.baidu.com" class="slider-item">
+          <img src="img/3.jpg" alt="">
+        </a>
+        <a href="http://www.baidu.com" class="slider-item">
+          <img src="img/2.jpg" alt="">
+        </a>
+        <a href="http://www.baidu.com" class="slider-item">
+          <img src="img/4.jpg" alt="">
+        </a>
+        <a href="http://www.baidu.com" class="slider-item">
+          <img src="img/5.jpg" alt="">
+        </a>
+        <a href="http://www.baidu.com" class="slider-item">
+          <img src="img/6.jpg" alt="">
+        </a>
+      </div>
+      <div class="slider-nav">
+        <div class="nav-item"></div>
+        <div class="nav-item"></div>
+        <div class="nav-item"></div>
+        <div class="nav-item"></div>
+        <div class="nav-item"></div>
+        <div class="nav-item"></div>
+      </div>
+      <div class="control-nav nav-left">
+        <div class="nav-arrow arrow-left"></div>
+      </div>
+      <div class="control-nav nav-right">
+        <div class="nav-arrow arrow-right"></div>
+      </div>
+    </div>
+  </div>
+  <script src="dist/js/smoothSlider.js?v=221"></script>
+  <script>
+    var smoothSlider = new SmoothSlider();
+
+  </script>
+</body>
+</html>
