@@ -1,2 +1,3 @@
-# ZibentongFe
-资本通前端代码
+# 幻灯片组件 
+
+  [https://jihan-z.github.io/smoothSlider/](https://jihan-z.github.io/smoothSlider/)
