@@ -6,13 +6,12 @@
   <link rel="stylesheet" href="dist/css/smoothSlider.css">
   <style>
     .slider-container {
-      width: 1100px;
       margin: 0 auto;
-      height: 250px; /*图片高度*/
+      height: 300px; /*图片高度*/
       overflow: hidden;
     }
     .smooth-slider {
-      width: 633px; /*图片宽度*/
+      width: 760px; /*图片宽度*/
     }
   </style>
 </head>
@@ -57,7 +56,10 @@
   </div>
   <script src="dist/js/smoothSlider.js?v=10"></script>
   <script>
-    var smoothSlider = new SmoothSlider();
+  var smoothSlider = new SmoothSlider({
+    autoPlay: true,
+    interva: 3000
+  });
 
   </script>
 </body>
