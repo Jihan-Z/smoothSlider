@@ -41,9 +41,9 @@ function SmoothSlider (option) {
   }
 
   var activateSlider = function (index) {
+    var activateSlider = sliders[index]
     var prevSlider = getPrevSlider(index)
     var nextSlider = getNextSlider(index)
-    var activateSlider = sliders[index]
 
     Array.prototype.forEach.call(sliders, function (slider) {
       util.removeClass(slider, 'prev-slider')
@@ -51,9 +51,11 @@ function SmoothSlider (option) {
       util.removeClass(slider, 'next-slider')
     })
 
-    util.addClass(prevSlider, 'prev-slider')
     util.addClass(activateSlider, 'active-slider')
-    util.addClass(nextSlider, 'next-slider')
+    if (sliderCount > 1) {
+      util.addClass(prevSlider, 'prev-slider')
+      util.addClass(nextSlider, 'next-slider')
+    }
 
     if (sliderNav) {
       activateNavItem(index);

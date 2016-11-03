@@ -2,6 +2,7 @@ $sliderZIndex: 99;
 $sliderMargin: 5px;
 .smooth-slider {
   position: relative;
+  width: 1000px;
   height: 100%;
   margin: 0 auto;
 
@@ -16,6 +17,7 @@ $sliderMargin: 5px;
       top: 0;
       left: 0;
       transition: opacity .2s;
+      width: 100%;
       height: 100%;
 
       &.prev-slider,
@@ -46,6 +48,7 @@ $sliderMargin: 5px;
       }
 
       img {
+        width: 100%;
         height: 100%;
       }
     }
