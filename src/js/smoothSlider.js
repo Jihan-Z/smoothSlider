@@ -5,12 +5,13 @@ function SmoothSlider (option) {
   var sliders = smoothContainer.getElementsByClassName('slider-item')
   var sliderNav = smoothContainer.getElementsByClassName('slider-nav')[0]
   var navItems = [];
+  var autoPlayTimer = null;
   if (!option) {
     option =  {};
   }
   var opt = {
     autoPlay: (option.autoPlay === false ? false : true),
-    interval: option.interval || 4000
+    interval: option.interval || 2000
   }
 
   if (sliderNav) {
@@ -114,13 +115,29 @@ function SmoothSlider (option) {
     if (sliderNav) {
       bindNavItemClickEvent()
     }
+
+    if (opt.autoPlay) {
+      smoothContainer.onmouseover = function () {
+        stopAutoPlay();
+      }
+
+      smoothContainer.onmouseout = function () {
+        startAutoPlay();
+      }
+    }
   }
 
   var startAutoPlay = function () {
-    setTimeout(function () {
+    autoPlayTimer = setTimeout(function () {
       activateNextSlider()
       startAutoPlay()
     }, opt.interval)
+  }
+
+  var stopAutoPlay = function () {
+    if (autoPlayTimer) {
+      clearTimeout(autoPlayTimer);
+    }
   }
 
   var init = function () {
